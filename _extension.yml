@@ -1,0 +1,17 @@
+title: Quarto Resume Template
+author: machichima (Nary Yeh)
+version: 1.0.0
+quarto-version: ">=1.4.0"
+contributes:
+  formats:
+    pdf:
+      documentclass: article
+      papersize: a4
+      geometry:
+        - margin=0.5in
+      filters:
+        - resume-filter.lua
+      include-in-header:
+        - resume-header.tex
+    html:
+      css: styles.css
