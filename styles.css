@@ -1,0 +1,169 @@
+/* NOTE: only for html, not polished */
+/* Resume Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 900px;
+  margin: 15px auto;
+  padding: 15px;
+  line-height: 1.3;
+}
+
+/* Header Section */
+.resume-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.resume-header h1 {
+  margin-bottom: 3px;
+  margin-top: 0;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.resume-header p {
+  font-size: 0.85em;
+  margin-top: 3px;
+  margin-bottom: 0;
+}
+
+.resume-header a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.resume-header a:hover {
+  text-decoration: underline;
+}
+
+/* Section Headings */
+h2 {
+  border-bottom: 2px solid #333;
+  padding-bottom: 2px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 1.2em;
+}
+
+/* Experience Blocks (Title Line) */
+h3.experience-block {
+  margin-bottom: 0;      /* Remove bottom margin to sit tight with metadata */
+  margin-top: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  padding-right: 180px;  /* Reserve space for the date on the right */
+  line-height: 1.2;
+  position: relative;
+}
+
+h3.experience-block a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+h3.experience-block a:hover {
+  text-decoration: underline;
+}
+
+/* Metadata Block Container */
+.metadata {
+  /* This flex container manages the Subtitle (Left) and Location (Right) */
+  display: flex;
+  justify-content: space-between; 
+  align-items: baseline;
+  position: relative; /* Anchor point for the absolute date */
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+/* Reset margins for all paragraphs inside metadata */
+.metadata p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+/* ITEM 1: The Date 
+   (The first paragraph inside metadata)
+   Logic: Remove from flex flow (absolute) and pull UP to the H3 line.
+*/
+.metadata p:nth-of-type(1) {
+  position: absolute;
+  top: -1.35em; /* Adjust this value if the date is too high/low */
+  right: 0;
+  text-align: right;
+  font-weight: normal;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* ITEM 2: The Subtitle / Company 
+   (The second paragraph)
+   Logic: Sits naturally on the left of the flex container.
+*/
+.metadata p:nth-of-type(2) {
+  text-align: left;
+  font-weight: 500;
+  color: #000;
+  /* Optional: Ensure it doesn't get crushed if location is long */
+  flex-shrink: 1; 
+  padding-right: 10px;
+}
+
+/* ITEM 3: The Location 
+   (The third paragraph)
+   Logic: Sits naturally on the right of the flex container.
+*/
+.metadata p:nth-of-type(3) {
+  text-align: right;
+  font-style: italic;
+  color: #555;
+  white-space: nowrap;
+  flex-shrink: 0; 
+}
+
+/* Lists */
+ul {
+  margin-top: 3px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 2px;
+}
+
+/* Nested lists */
+li ul {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+li li {
+  margin-bottom: 1px;
+}
+
+/* Links in content */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Summary section spacing */
+h2 + ul {
+  margin-top: 3px;
+}
+
+/* Print styles */
+@media print {
+  body {
+    max-width: 100%;
+    margin: 0;
+    padding: 15px;
+  }
+}

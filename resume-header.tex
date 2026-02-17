@@ -1,0 +1,45 @@
+% resume-header.tex
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\hypersetup{colorlinks=true, urlcolor=black}
+
+% 1. DEFINE RESUME HEADER ENVIRONMENT
+% This centers the name and the links block
+\newenvironment{resume-header}{
+    \par\centering
+}{
+    \par
+}
+
+% 2. CUSTOMIZE HEADER 1 (# Name)
+% Huge, Centered, NO horizontal line
+\titleformat{\section}
+  {\centering\Huge\bfseries} % Format
+  {}                         % Label
+  {0em}                      % Sep
+  {}                         % Before
+  []                         % After (Empty = No line)
+  
+\titlespacing{\section}{0pt}{0pt}{6pt}
+
+% 3. CUSTOMIZE HEADER 2 (## Summary, ## Experience)
+% Large, Bold, WITH horizontal line
+\titleformat{\subsection}
+  {\Large\bfseries}          % Format
+  {}                         % Label
+  {0em}                      % Sep
+  {}                         % Before
+  [\titlerule]               % After (Adds the line!)
+  
+\titlespacing{\subsection}{0pt}{12pt}{6pt}
+
+% 4. Paragraph formatting (for bullets)
+\titleformat{\paragraph}[runin]{\normalfont\bfseries}{\theparagraph}{1em}{}
+\titlespacing{\paragraph}{0pt}{6pt}{1em}
+
+% CONFIGURE LISTS (BULLET POINTS) HERE
+\setlist[itemize]{leftmargin=1.5em, labelsep=0.5em, noitemsep, topsep=0pt}
+% set the style for sub bullet
+\setlist[itemize,2]{label=$\circ$, leftmargin=1.5em, labelsep=0.5em, noitemsep, topsep=0pt}

@@ -1,0 +1,94 @@
+---
+format:
+  html:
+    toc: false
+    css: styles.css
+  pdf:
+    documentclass: article
+    papersize: a4
+    geometry:
+      - margin=0.5in
+    filters: 
+      - resume-filter.lua
+    include-in-header:
+      - resume-header.tex
+      - text: |
+          \pagestyle{empty}
+---
+
+::: {.resume-header .center}
+# YOUR NAME
+:::
+
+::: {.center data-latex=""}
+
+email@example.com | +000 000000000 | [Github]() | [LinkedIn]() | [Portfolio/Blog]()
+
+:::
+
+
+## Summary
+
+- High-level achievement or role description, e.g., Open Source Contributor with X+ PRs
+- Core technical focus, e.g., Backend Engineer focused on distributed systems and cloud infrastructure
+
+
+## Work Experience
+
+### Job Title {.experience-block}
+
+::: {.metadata}
+[Month Year - Present]{.date}
+[Company Name]{.subtitle}
+[Location]{.location}
+:::
+
+- Responsibility 1: Led the design and implementation of X service
+- Responsibility 2: Optimized Y system using Z technology, resulting in better performance
+- Responsibility 3: Collaborated with cross-functional teams to deliver A/B features
+
+
+### Previous Job Title {.experience-block}
+
+::: {.metadata}
+[Start Date - End Date]{.date}
+[Previous Company Name]{.subtitle}
+[Location]{.location}
+:::
+
+- Summary of role and major achievements
+
+## Projects
+
+### [Project Name](https://github.com/org/repo) {.experience-block}
+
+::: {.metadata}
+[Month Year - Present]{.date}
+[Brief description of the project tech stack]{.subtitle}
+:::
+
+- Key Contribution 1: Describe the impact and the specific technical challenge you solved
+- Key Contribution 2: Mention specific PRs or architectural changes you led
+- Metric-driven result: eg., Reduced latency by X% or improved throughput by Y%
+
+### [Secondary Project](https://github.com/org/repo) {.experience-block}
+
+::: {.metadata}
+[Month Year - Month Year]{.date}
+[Project Subtitle / Tech Stack]{.subtitle}
+:::
+
+- Feature implementation details
+- Bug fixes or infrastructure maintenance work
+
+## Education
+
+### University Name - Degree Name {.experience-block}
+
+::: {.metadata}
+[Start Date - End Date]{.date}
+[Degree details, e.g., MSc Computer Science: Distinction]{.subtitle}
+[Location]{.location}
+:::
+
+- Cources, activities
