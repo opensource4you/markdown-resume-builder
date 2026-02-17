@@ -1,0 +1,12 @@
+# Quarto generated files and folders
+/.quarto/
+/*_files/
+/*_cache/
+/*_freeze/
+.Rproj.user/
+
+# Output formats (adjust as needed for your project)
+*.html
+
+# Specific temporary files
+.DS_Store

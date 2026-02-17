@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Resume"
+  navbar:
+    left:
+      - href: resume.qmd
+        text: Resume
+
+format:
+  html:
+    theme: cosmo
+    toc: false
