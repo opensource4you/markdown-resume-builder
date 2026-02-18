@@ -1,0 +1,83 @@
+name: Build and Release Resume
+
+on:
+  # 1. 當你直接修改 repo 裡的 resume.md 並 push 時觸發
+  push:
+    paths:
+      - 'resume.md'
+    branches:
+      - main
+
+  # 2. 手動觸發，強制要求貼上外部 Markdown 連結
+  workflow_dispatch:
+    inputs:
+      resume_url:
+        description: '請貼上 resume.md 的 Raw URL (必填)'
+        required: true  # 這裡改成 true，不填不能跑
+        type: string
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 必須有這個權限才能上傳 Release
+
+    steps:
+      # --- 步驟 1: 檢出程式碼 ---
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # --- 步驟 2: 如果是手動輸入 URL，則下載覆蓋 ---
+      # 雖然 workflow_dispatch 強制必填，但 push 觸發時 inputs 是空的
+      # 所以這個 if 判斷依然保留，確保 push 時不會因為沒網址而報錯
+      - name: Download from URL (Manual Trigger)
+        if: ${{ inputs.resume_url != '' }}
+        run: |
+          echo "正在從 URL 下載 resume.md..."
+          curl -L "${{ inputs.resume_url }}" -o resume.md
+
+      # --- 步驟 3: 執行 Docker 轉檔 (生成 resume.pdf) ---
+      - name: Convert Markdown to PDF
+        run: |
+          echo "拉取 Docker映像檔..."
+          docker pull ghcr.io/opensource4you/markdown-resume-builder/resume:latest
+          
+          echo "開始轉檔..."
+          # 確保工作目錄權限正確
+          chmod 777 $(pwd)
+          
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            ghcr.io/opensource4you/markdown-resume-builder/resume:latest \
+            /bin/sh -c "cp /workspace/resume.md /tmp/markdown-resume-builder/resume.qmd && quarto render resume.qmd --to pdf && cp /tmp/markdown-resume-builder/_site/resume.pdf /workspace/"
+          
+          echo "檢查 PDF 是否生成..."
+          ls -l resume.pdf
+
+      # --- 步驟 4: 改名為 resume-<使用者名稱>.pdf ---
+      - name: Rename PDF with Username
+        run: |
+          # github.actor 是觸發者 (例如 jimmy-tsai)
+          # 將 resume.pdf 改名為 resume-jimmy-tsai.pdf
+          mv resume.pdf resume-${{ github.actor }}.pdf
+          
+          echo "✅ 檔案已改名，準備發布："
+          ls -l resume-*.pdf
+
+      # --- 步驟 5: 上傳到 Release (多人共用一個 Tag) ---
+      - name: Update Shared Release
+        uses: softprops/action-gh-release@v2
+        with:
+          # 所有人都使用同一個 Tag
+          tag_name: all-resumes
+
+          # Release 的標題
+          name: 團隊履歷總表 (自動更新)
+
+          # 使用萬用字元抓取剛才改名後的檔案
+          files: resume-*.pdf
+
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
