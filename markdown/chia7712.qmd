@@ -1,0 +1,105 @@
+---
+format:
+  html:
+    toc: false
+    css: styles.css
+  pdf:
+    documentclass: article
+    papersize: a4
+    geometry:
+      - margin=0.5in
+    filters:
+      - resume-filter.lua
+    include-in-header:
+      - resume-header.tex
+      - text: |
+          \pagestyle{empty}
+---
+
+# Chia-Ping Tsai
+
+- **Email:** chia7712@gmail.com
+
+- **GitHub:** [github.com/chia7712](https://github.com/chia7712)
+
+- **Location:** Tainan, Taiwan
+
+## Profile
+
+**Open Source Leader & Distributed Systems Expert**
+
+Accomplished engineer and community builder with a PhD in Computer Science. Proven track record in building high-performance distributed systems and fostering open-source ecosystems. As an Apache Member and PMC/Committer for multiple top-level projects, I specialize in bridging the gap between complex technical architectures and engineering talent, having mentored countless developers into becoming open-source contributors.
+
+## Technical Skills
+
+- **Big Data & Distributed Systems:** Apache Kafka, Apache HBase, Apache YuniKorn, Apache Hadoop
+
+- **Core Competencies:** System Architecture, Performance Tuning, Open Source Governance, Technical Mentoring
+
+## Experience
+
+### Lead | Apache Taipei (ALC Taipei)
+
+*2025 - Present*
+
+- **Founded and lead** the first official Apache Local Community in Taiwan, serving as the primary bridge between the local developer ecosystem and the global Apache Software Foundation.
+
+- **Strategic Alliances:** **Partnered with** the Ministry of Digital Affairs and international tech giants to **co-host** high-impact events like the "AI International Tech Day."
+
+- **Global Visibility:** Spearheading initiatives to elevate Taiwanese open-source talent on the world stage.
+
+### Maintainer | Apache Kafka
+
+*2024 - Present*
+
+- **Core Maintainer:** **Orchestrated major architectural changes** and drove the project roadmap to ensure long-term stability and scalability.
+
+- **Code Quality:** Reviewed over **2,000 commits** across all modules, ensuring high standards for code quality and system reliability.
+
+- **Mentorship:** Mentored contributors who have collectively delivered more than **1,000 commits**, significantly expanding the project's contributor base.
+
+### Technical Consultant, Big Data & Open Source
+
+*2023 - Present*
+
+- **Performance Engineering:** Led an engineering team to optimize Apache Kafka's data infrastructure.
+
+- **Measurable Success:** Achieved a **30% improvement in write speed** through custom algorithmic optimizations.
+
+- **Academic Contribution:** The optimization algorithm was published in **IEEE BigData**, validating the industrial solution with academic rigor.
+
+### Founder & Host | OpenSource4You
+
+*2023 - Present*
+
+- **Community Building:** Established a vibrant open-source community in Taiwan dedicated to mentoring engineers.
+
+- **Impact:** Built a network of over **5,000 engineers**, fostering **10+ new open-source committers** and hosting **80+ technical talks**.
+
+### Engineer and Consultant | Is-Land
+
+*2018 - 2022*
+
+- **Solution Architecture:** Guided over **10 enterprise customers** in adopting open-source architectures, reducing vendor lock-in.
+
+- **Product Development:** Designed and implemented a streaming platform that streamlined Kafka deployment and development workflows.
+
+## Open Source Leadership & Governance
+
+- **Apache Member** (The Apache Software Foundation)
+
+- **PMC Member:** Apache HBase, Apache Kafka, Apache YuniKorn
+
+- **Program Committee Member:** HBaseConAsia, Kafka Summit
+
+## Education
+
+- **National Cheng Kung University**, PhD in Computer Science (*2012 - 2020*)
+
+## Selected Publications
+
+- H.-C. Hsiao, **C.-P. Tsai**, et al. *"Load Balancing Algorithms and Their Impacts on Apache Kafka,"* IEEE International Conference on Big Data (BigData), 2023.
+
+- **Chia-Ping Tsai** and Hung-Chang Hsiao. *"The Data Recovery Service in NoSQL,"* IEEE International Conference on Big Data (IEEE BigData), 2022.
+
+- **C.-P. Tsai**, et al. *"The Time Machine in Columnar NoSQL Databases: The Case of Apache HBase,"* Future Internet, 2022.
