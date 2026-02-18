@@ -16,22 +16,25 @@ jobs:
         uses: actions/checkout@v4
 
       # --- 替換掉出錯的解析步驟 ---
-      - name: Extract Gist URL from Issue Body
+      - name: Extract URL from Issue Body
         id: extract
         shell: bash
         run: |
-          # 使用 grep 尋找 Gist URL 欄位下方的網址
-          # 因為 Issue Form 的格式很固定，網址通常會出現在 ### Gist Raw URL 標題之後
-          # 我們抓取以 https://gist.githubusercontent.com 開頭的字串
-          GIST_URL=$(echo "${{ github.event.issue.body }}" | grep -oP 'https://gist\.githubusercontent\.com/[^\s\)]+')
+          # 修正 Regex：支援 gist.githubusercontent 與 raw.githubusercontent
+          # 並過濾掉潛在的 \r 或其他非 URL 字元
+          RAW_BODY="${{ github.event.issue.body }}"
           
-          if [ -z "$GIST_URL" ]; then
-            echo "Error: No valid Gist URL found."
+          # 這裡的 Regex 同時允許 gist 和 raw 兩種開頭
+          EXTRACTED_URL=$(echo "$RAW_BODY" | grep -oP 'https://(gist|raw)\.githubusercontent\.com/[^\s\)\r]+' | head -1)
+          
+          if [ -z "$EXTRACTED_URL" ]; then
+            echo "::error::找不到有效的 GitHub Raw URL。請確保網址是以 gist.githubusercontent.com 或 raw.githubusercontent.com 開頭。"
             exit 1
           fi
           
-          echo "url=$GIST_URL" >> $GITHUB_OUTPUT
-          echo "Found URL: $GIST_URL"
+          # 輸出結果
+          echo "url=$EXTRACTED_URL" >> $GITHUB_OUTPUT
+          echo "✅ Successfully extracted URL: $EXTRACTED_URL"
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
