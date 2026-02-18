@@ -1,27 +1,34 @@
-name: "🚀 快速生成履歷 (Gist)"
-description: "貼上你的 Gist Raw 連結，自動為你渲染 PDF"
+name: "🚀 快速生成履歷 (GitHub URL)"
+description: "貼上你的 Gist 或 GitHub Raw 連結，自動為你渲染 PDF"
 title: "[Build]: "
 labels: ["build-request"]
 body:
   - type: markdown
     attributes:
       value: |
-        ### 使用說明
-        1. 將你的履歷內容寫在 [GitHub Gist](https://gist.github.com/)。
-        2. 點擊 Gist 頁面上的 **"Raw"** 按鈕。
-        3. 複製該網址並貼在下方欄位。
+        ### 📖 使用說明
+        1. 將履歷內容寫在 [GitHub Gist](https://gist.github.com/) 或 GitHub 儲存庫中。
+        2. 點擊頁面上的 **"Raw"** 按鈕取得原始檔案連結。
+        3. 複製網址並貼在下方欄位。
+
+        ### 🔄 如何更新？
+        **不需要重複開 Issue！** 如果您修改了 Gist 內容或想換一個網址：
+        * 請直接**編輯 (Edit)** 這個 Issue 的內容。
+        * 點擊 **Update comment** 儲存後，系統就會自動偵測並重新渲染 PDF。
+
   - type: input
     id: gist_url
     attributes:
-      label: Gist Raw URL
-      description: "請確保連結以 https://gist.githubusercontent.com/... 開頭"
+      label: Gist / GitHub Raw URL
+      description: "支援 gist.githubusercontent.com 或 raw.githubusercontent.com"
       placeholder: "https://gist.githubusercontent.com/username/hash/raw/resume.qmd"
     validations:
       required: true
+
   - type: checkboxes
     id: terms
     attributes:
       label: 確認事項
       options:
-        - label: "我已確認 Gist 內容符合專案定義的 Markdown 格式"
+        - label: "我已確認內容符合專案定義格式，且知道「編輯 Issue」可觸發重新渲染。"
           required: true
