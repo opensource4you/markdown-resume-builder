@@ -1,0 +1,74 @@
+name: Build Resume from Issue
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  render-and-reply:
+    # 只有帶有 build-request 標籤的 Issue 才會觸發，避免一般討論被干擾
+    if: contains(github.event.issue.labels.*.name, 'build-request')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 1. 解析 Issue 表單資料
+      - name: Parse Issue Data
+        id: parse
+        uses: zsquareplusc/gh-action-parse-issue-form@v1
+        with:
+          payload: ${{ github.event.issue.body }}
+
+      # 2. 安裝 Quarto 環境
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install TinyTeX
+        run: quarto install tinytex
+
+      # 3. 下載 Gist 內容並命名為專案預期的檔名
+      - name: Download Gist
+        run: |
+          GIST_URL="${{ fromJson(steps.parse.outputs.data).gist_url }}"
+          echo "Downloading from: $GIST_URL"
+          curl -L -o resume.qmd "$GIST_URL"
+
+      # 4. 執行渲染 (PDF)
+      - name: Render PDF
+        run: quarto render resume.qmd --to pdf
+
+      # 5. 上傳為 Artifact (保留 90 天)
+      - name: Upload PDF
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.issue.number }}-resume-pdf
+          path: resume.pdf
+
+      # 6. 成功或失敗回報至 Issue
+      - name: Reply to Issue
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { job, steps } = process.env;
+            const issueNumber = context.issue.number;
+            const isSuccess = "${{ job.status }}" === "success";
+            
+            let message = "";
+            if (isSuccess) {
+              message = `### ✅ 履歷渲染成功！\n\nPDF 已生成，您可以前往 [Actions 頁面](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) 下載 Artifacts。`;
+            } else {
+              message = `### ❌ 履歷渲染失敗\n\n請檢查以下原因：\n1. **Gist URL** 是否正確（須為 Raw 連結）。\n2. **Markdown 語法** 是否有誤。\n3. 您可以查看 [執行日誌](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) 獲取詳細錯誤訊息。`;
+            }
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: message
+            });

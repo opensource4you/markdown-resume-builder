@@ -1,0 +1,27 @@
+name: "🚀 快速生成履歷 (Gist)"
+description: "貼上你的 Gist Raw 連結，自動為你渲染 PDF"
+title: "[Build]: "
+labels: ["build-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 使用說明
+        1. 將你的履歷內容寫在 [GitHub Gist](https://gist.github.com/)。
+        2. 點擊 Gist 頁面上的 **"Raw"** 按鈕。
+        3. 複製該網址並貼在下方欄位。
+  - type: input
+    id: gist_url
+    attributes:
+      label: Gist Raw URL
+      description: "請確保連結以 https://gist.githubusercontent.com/... 開頭"
+      placeholder: "https://gist.githubusercontent.com/username/hash/raw/resume.qmd"
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 確認事項
+      options:
+        - label: "我已確認 Gist 內容符合專案定義的 Markdown 格式"
+          required: true
