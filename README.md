@@ -4,6 +4,21 @@ A clean, single-source resume template built with Quarto. Write in Markdown, gen
 
 Below is a preview of the generated resume. You can also view the [Source File](./resume.qmd) or the [Full PDF](./_site/resume.pdf).
 
+---
+
+## 🚀 快速開始：透過 Issue 自動渲染 (無需安裝)
+
+如果你不想在本地安裝 Quarto 或 LaTeX，可以直接利用本專案的自動化流程：
+
+1. **準備內容**：將你的履歷內容（Markdown/Quarto）上傳至 [GitHub Gist](https://gist.github.com/)。
+2. **獲取連結**：在 Gist 頁面點擊 **"Raw"** 並複製該網域為 `gist.githubusercontent.com` 的網址。
+3. **提交 Issue**：前往 [建立履歷 Issue](https://github.com/opensource4you/markdown-resume-builder/issues/new?template=resume-builder.yml)，貼上連結並送出。
+4. **獲取 PDF**：稍等約 1 分鐘，機器人會回覆處理進度。請點擊留言中的連結前往 **Action Summary** 頁面下載產出的 PDF。
+
+> **💡 小技巧：** 若需更新履歷內容，只需直接 **編輯 (Edit)** 該 Issue 的內容並儲存，系統就會自動偵測變更並重新渲染最新的版本，無需重複開啟 Issue。
+
+---
+
 ![preview](img/preview.png)
 
 ## Prerequisites
