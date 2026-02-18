@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.issue.number }}-resume-pdf
-          path: resume.pdf
+          path: _site/resume.pdf
 
       - name: Reply to Issue
         if: always()
