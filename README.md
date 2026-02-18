@@ -40,7 +40,7 @@ The resume has three main sections:
 You can initialize a new project using this template directly via the Quarto CLI. This is the cleanest way to start a new resume:
 
 ```sh
-quarto use template <your-github-username>/<your-repo-name>
+quarto use template machichima/quarto-resume-template
 ```
 
 Note: To make `quarto use template` work seamlessly, ensure you have a `template.qmd` in your root directory (or the directory you specify). Quarto will look for this file to scaffold the user's new project.
